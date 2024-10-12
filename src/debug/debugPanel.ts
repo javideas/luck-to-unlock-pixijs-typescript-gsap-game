@@ -1,6 +1,7 @@
 import { Container, Graphics, Application, Text } from 'pixi.js';
 import { createText, positionText } from '../utils/textUtils';
 import progressConfig from '../config/progressConfig.json';
+import { CombinationPair } from '../utils/combinationGenerator';
 
 function createPanelBackground(width: number, height: number): Graphics {
     const background = new Graphics();
@@ -68,7 +69,7 @@ export function createDebugPanel(app: Application, posX: number, posY: number): 
     const scaleFactor = 2;
     const textPadding = 35;
     const titlePadding = 20;
-    const buttonPadding = 120; // Padding between text and button
+    const buttonPadding = 120;
     const buttonWidth = 100;
     const buttonHeight = 50;
     const panel = new Container();
@@ -119,4 +120,70 @@ export function createDebugPanel(app: Application, posX: number, posY: number): 
     panel.position.set(posX, posY);
 
     return panel;
+}
+
+export function updateDebugPanel(panel: Container, combination: CombinationPair[]) {
+    console.log('updateCombinationDebugPanel', combination);
+    
+    const infoTexts = panel.children.filter(child => child instanceof Text) as Text[];
+    console.log('Found info texts:', infoTexts.length);
+    
+    // Find the index where the combination info starts
+    const combinationStartIndex = infoTexts.findIndex(text => text.text.startsWith('Current Combination:'));
+    console.log('Combination start index:', combinationStartIndex);
+    
+    if (combinationStartIndex !== -1) {
+        // Update the combination title
+        infoTexts[combinationStartIndex].text = 'Current Combination:';
+        
+        // Update or add new combination pair texts
+        combination.forEach((pair, index) => {
+            const pairText = `Pair ${index + 1}: Direction: ${pair.direction}, Steps: ${pair.steps}`;
+            if (combinationStartIndex + index + 1 < infoTexts.length) {
+                // Update existing text
+                infoTexts[combinationStartIndex + index + 1].text = pairText;
+            } else {
+                // Add new text if it doesn't exist
+                const newText = createText(pairText, {
+                    fontSize: 32 * 2, // Assuming scaleFactor is 2
+                    fill: 'lightgray'
+                }, 0, 0);
+                panel.addChild(newText);
+                infoTexts.push(newText);
+            }
+        });
+        
+        // Remove any excess combination pair texts
+        for (let i = combinationStartIndex + combination.length + 1; i < infoTexts.length; i++) {
+            panel.removeChild(infoTexts[i]);
+        }
+        
+        // Reposition all texts
+        const titleText = panel.getChildByName('titleText') as Text | null;
+        console.log('Title text found:', titleText !== null);
+        
+        const textPadding = 35;
+        const titlePadding = 20;
+        
+        let currentY = textPadding;
+        if (titleText) {
+            currentY += titleText.height + titlePadding;
+        }
+        
+        infoTexts.forEach((text, index) => {
+            text.position.set(textPadding, currentY);
+            currentY += text.height + textPadding;
+        });
+        
+        // Adjust panel size
+        const background = panel.getChildAt(0) as Graphics;
+        const panelWidth = background.width;
+        const panelHeight = currentY;
+        background.clear();
+        background.beginFill(0x333333, 0.8);
+        background.drawRoundedRect(0, 0, panelWidth, panelHeight);
+        background.endFill();
+    } else {
+        console.error('Combination section not found in debug panel');
+    }
 }

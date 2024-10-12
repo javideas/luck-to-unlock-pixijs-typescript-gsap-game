@@ -27,9 +27,9 @@
         "current_combination": {
             "label": "Current Combination",
             "value": {
-                "pair1": { "label": "Pair 1", "direction": -1, "steps": 3 },
-                "pair2": { "label": "Pair 2", "direction": 1, "steps": 7 },
-                "pair3": { "label": "Pair 3", "direction": -1, "steps": 4 }
+                "pair1": { "label": "Pair 1", "direction": "counter-clockwise", "steps": 3 },
+                "pair2": { "label": "Pair 2", "direction": "clockwise", "steps": 7 },
+                "pair3": { "label": "Pair 3", "direction": "counter-clockwise", "steps": 4 }
             }
         }
     }

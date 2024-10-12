@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@pixi/layout": "^2.0.1",
+    "eventemitter3": "^5.0.1",
     "gsap": "^3.12.5",
     "pixi.js": "^7.2.0",
     "which": "^5.0.0"

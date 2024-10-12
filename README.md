@@ -64,6 +64,7 @@ This project is a mini game where the player must unlock a vault to reveal a tre
             "gameManager.ts": "Manage game",
             "gameState.ts": "Track and Update game progression",
             "playerState.ts": "Track and Update player progression",
+            "progressConfig.json": "Configuration for progress tracking",
             "soundManager.ts": "Manages sound effects"
         },
         "gameObjects": {

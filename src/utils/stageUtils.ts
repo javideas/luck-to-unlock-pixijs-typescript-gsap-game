@@ -2,7 +2,7 @@ import { Application, Container, Sprite } from "pixi.js";
 import { createDebugPanel } from "../debug/debugPanel";
 
 export function initDebugPanel(app: Application, container: Container) {
-    const debugPanel = createDebugPanel(app, app.screen.width + 300, (app.screen.height * -1) - 300);
+    const debugPanel = createDebugPanel(app, app.screen.width - 400, (app.screen.height * -1) - 300);
     container.addChild(debugPanel);
 }
 

@@ -1,0 +1,36 @@
+{
+    "infoTexts": {
+        "p_dir": {
+            "label": "Player Direction",
+            "value": "0"
+        },
+        "p_step": {
+            "label": "Player Step",
+            "value": "0"
+        },
+        "p_pair": {
+            "label": "Player Pair",
+            "value": "0"
+        },
+        "expected_dir": {
+            "label": "Expected Direction",
+            "value": "-1"
+        },
+        "rem_steps": {
+            "label": "Remaining Steps",
+            "value": "9"
+        },
+        "rem_pairs": {
+            "label": "Remaining Pairs",
+            "value": "3"
+        },
+        "current_combination": {
+            "label": "Current Combination",
+            "value": {
+                "pair1": { "label": "Pair 1", "direction": -1, "steps": 3 },
+                "pair2": { "label": "Pair 2", "direction": 1, "steps": 7 },
+                "pair3": { "label": "Pair 3", "direction": -1, "steps": 4 }
+            }
+        }
+    }
+}

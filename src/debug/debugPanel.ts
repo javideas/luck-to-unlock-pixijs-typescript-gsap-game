@@ -1,6 +1,6 @@
 import { Container, Graphics, Application, Text } from 'pixi.js';
 import { createText, positionText } from '../utils/textUtils';
-import progressConfig from '../core/progressConfig.json'; // Assuming the JSON is imported
+import progressConfig from '../config/progressConfig.json';
 
 function createPanelBackground(width: number, height: number): Graphics {
     const background = new Graphics();

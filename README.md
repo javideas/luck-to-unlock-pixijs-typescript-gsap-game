@@ -51,16 +51,15 @@ This project is a mini game where the player must unlock a vault to reveal a tre
         "sounds": "The sound assets"
     },
     "src": {
-        "animations": {
-            "vaultAnims.ts": "Animations related to the door",
-            "handleAnims.ts": "Animations related to the handle",
-            "treasureAnims.ts": "Glitter and shine animations"
-        },
         "config": {
             "config.ts": "Holds game constants and configuration values"
         },
         "core": {
-            "index.ts": "Entry point for game initialization",
+            "animManagers": {
+                "vaultAnims.ts": "Animations related to the door",
+                "handleAnims.ts": "Animations related to the handle",
+                "treasureAnims.ts": "Glitter and shine animations"
+            },
             "assetLoader.ts": "Handles loading of assets (images, sounds, etc.)",
             "gameManager.ts": "Manage game",
             "gameState.ts": "Track and Update game progression",
@@ -79,9 +78,6 @@ This project is a mini game where the player must unlock a vault to reveal a tre
         "stages": {
             "stageVault.ts": "Handles the vault stage setup and interactions"
         },
-        "styles": {
-            "styles.css": "Global CSS file for the project"
-        },
         "types": {
             "animationTypes.ts": "TypeScript interfaces and types for animations",
             "eventTypes.ts": "TypeScript interfaces and types for events",
@@ -94,13 +90,14 @@ This project is a mini game where the player must unlock a vault to reveal a tre
         "debug": {
             "debugPanel.ts": "Displays debug information such as game state and player inputs"
         },
-        "vite-env.d.ts": "TypeScript declarations for environment variables"
+        "app.ts": "Entry point for game initialization",
+        "styles.css": "Global CSS file for the project"
     },
     ".gitignore": "Git ignore file",
     "index.html": "Main HTML file",
+    "LICENSE": "License file",
     "package-lock.json": "Dependency lock file",
     "package.json": "Project configuration and dependencies",
-    "LICENSE": "License file",
     "README.md": "This file",
     "tsconfig.json": "TypeScript configuration",
     "vite.config.ts": "Vite configuration"

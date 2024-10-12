@@ -4,12 +4,12 @@
   "version": "1.0.0",
   "description": "A mini game where players unlock a vault to reveal a treasure by entering a secret combination. Features include interactive gameplay, animations, and error handling. Implemented using PixiJS, TypeScript, and GSAP.",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
-    "deploy": "vite build && gh-pages -d dist",
-    "clean": "rimraf ./dist",
-    "start": "webpack-dev-server --mode=development"
+    "dev": "vite",                             // For local development
+    "build": "vite build",                     // For standard production build
+    "build:github": "NODE_ENV=github vite build --mode github", // For GitHub Pages deployment
+    "serve": "vite preview",                   // For previewing production build locally
+    "deploy": "gh-pages -d dist",              // To deploy to GitHub Pages
+    "clean": "rimraf ./dist"                   // To clean the output folder
   },
   "keywords": [
     "mini-game",

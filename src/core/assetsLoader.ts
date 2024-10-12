@@ -1,6 +1,6 @@
 import { Assets, Texture } from 'pixi.js';
+const imgFolderPath = import.meta.env.VITE_IMG_PATH;
 
-const imgFolderPath = './assets/images/';
 const assetsPaths = {
   bankBg: imgFolderPath + 'bg.png',
   doorClosed: imgFolderPath + 'door.png',

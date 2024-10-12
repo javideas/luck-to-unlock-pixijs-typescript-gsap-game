@@ -1,5 +1,7 @@
 # "Luck to Unlock" Mini Game
 
+## [Live Demo](https://javier-moreno.github.io/luck-to-unlock-pixijs-typescript-gsap-game/)
+
 ## Table of Contents
 - [Overview](#overview)
 - [Game Flow](#game-flow)

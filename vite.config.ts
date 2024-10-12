@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: '.', // Assuming your source files are in the 'src' directory
+  base: '/luck-to-unlock-pixijs-typescript-gsap-game/',
   build: {
-    outDir: '../dist', // Output directory for the build
+    outDir: 'dist',
   },
 });

@@ -5,13 +5,24 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "vite build --emptyOutDir",
+    "serve": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
-  "keywords": ["mini-game", "vault", "treasure", "PixiJS", "TypeScript", "GSAP", "interactive", "animations"],
+  "keywords": [
+    "mini-game",
+    "vault",
+    "treasure",
+    "PixiJS",
+    "TypeScript",
+    "GSAP",
+    "interactive",
+    "animations"
+  ],
   "author": "Javier Moreno",
   "license": "MIT",
   "devDependencies": {
+    "gh-pages": "^6.2.0",
     "typescript": "^5.6.3",
     "vite": "^5.4.8"
   },

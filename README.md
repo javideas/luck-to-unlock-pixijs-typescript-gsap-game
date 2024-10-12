@@ -1,22 +1,31 @@
 # "Luck to Unlock" Mini Game
 
+## Table of Contents
+- [Overview](#overview)
+- [Game Flow](#game-flow)
+- [Requirements](#requirements)
+- [Bonus Features](#bonus-features)
+- [Technologies Used](#technologies-used)
+- [Project Structure](#project-structure)
+- [Contribution Guidelines](#contribution-guidelines)
+
 ## Overview
 This project is a mini game where the player must unlock a vault to reveal a treasure. The game involves interacting with a vault handle to enter a secret combination.
 
-### Game Flow
+## Game Flow
 1. **Start**: The game begins with the vault door closed. A random secret combination is generated and logged in the browser console.
 2. **Combination**: The combination consists of 3 pairs, each with a number (1-9) and a direction ("clockwise" or "counterclockwise"). For example: "2 clockwise, 7 counterclockwise, 5 clockwise". Each number represents a 60° rotation, with 6 being a full rotation.
 3. **Interaction**: Players can interact with the vault handle by clicking or dragging. Each interaction rotates the handle by 60° with animation.
 4. **Unlocking**: Enter the correct combination to open the vault door, revealing the treasure with a glitter animation.
 5. **Error Handling**: If an incorrect combination is entered, the game resets with a new combination, and the vault handle spins rapidly as a visual cue.
 
-### Requirements
+## Requirements
 - Using the provided assets.
 - Implement using PixiJS (version 7 or later) and TypeScript.
 - Ensure the game is responsive across different screen resolutions.
 - Maintain a minimum of 5 commits in your repository.
 
-### Bonus Features
+## Bonus Features
 - Use promises instead of `setTimeout` and `setInterval`.
 - Add a shadow to the handle that spins with it.
 - Include a timer on the keypad to track the time taken to unlock the safe, resetting with each new game.
@@ -91,8 +100,8 @@ This project is a mini game where the player must unlock a vault to reveal a tre
     "tsconfig.json": "TypeScript configuration",
     "vite.config.ts": "Vite configuration"
 }
-
 ```
+
 ## Contribution Guidelines
 - Follow the Conventional Commits specification for commit messages.
 - Ensure branches are named using kebab-case.

@@ -1,5 +1,5 @@
 import { Application, VERSION } from "pixi.js";
-import { initStageVault } from "./stages/stageVault";
+import GameManager from "./core/gameManager";
 
 function main() {
     // Create a new PixiJS application
@@ -10,12 +10,12 @@ function main() {
         resizeTo: document.body
     });
 
-    // Add the view to the DOM
     document.body.appendChild(app.view);
+    console.log('Javideas presents... Luck to Unlock!');
     console.log('PixiJS app initialized. Version:', VERSION);
-    // Initialize the stage
-    initStageVault(app);
+
+    // Initialize the GameManager
+    const gameManager = new GameManager(app);
 }
 
-// Call the main function to start the application
 main();

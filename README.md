@@ -45,26 +45,25 @@ This project is a mini game where the player must unlock a vault to reveal a tre
 ## Project Structure
 ```
 {
-    "public": {
+    ✔"public": {
         "fonts": "The font assets",
-        "images": "The image assets",
+        ✔"images": "The image assets",
         "sounds": "The sound assets"
     },
-    "src": {
-        "config": {
-            "config.ts": "Holds game constants and configuration values"
+    ✔"src": {
+        ✔"config": {
+            ✔"progressConfig.json": "Configuration for progress tracking",
         },
-        "core": {
+        ✔"core": {
             "animManagers": {
                 "vaultAnims.ts": "Animations related to the door",
                 "handleAnims.ts": "Animations related to the handle",
                 "treasureAnims.ts": "Glitter and shine animations"
             },
-            "assetLoader.ts": "Handles loading of assets (images, sounds, etc.)",
+            ✔"assetLoader.ts": "Handles loading of assets (images, sounds, etc.)",
             "gameManager.ts": "Manage game",
             "gameState.ts": "Track and Update game progression",
             "playerState.ts": "Track and Update player progression",
-            "progressConfig.json": "Configuration for progress tracking",
             "soundManager.ts": "Manages sound effects"
         },
         "gameObjects": {
@@ -76,24 +75,24 @@ This project is a mini game where the player must unlock a vault to reveal a tre
         "controllers": {
             "inputManager.ts": "Manages user input (click, drag, etc.)"
         },
-        "stages": {
-            "stageVault.ts": "Handles the vault stage setup and interactions"
+        ✔"stages": {
+            ✔"stageVault.ts": "Handles the vault stage setup and interactions"
         },
         "types": {
             "animationTypes.ts": "TypeScript interfaces and types for animations",
             "eventTypes.ts": "TypeScript interfaces and types for events",
             "gameTypes.ts": "TypeScript interfaces and types for game objects"
         },
-        "utils": {
-            "combinationGenerator.ts": "Generates the random secret combination for the vault",
+        ✔"utils": {
+            ✔"combinationGenerator.ts": "Generates the random secret combination for the vault",
             "combinationValidator.ts": "Validates player input against the secret combination",
-            "stageUtils.ts": "Utility functions for stage setup"
+            ✔"stageUtils.ts": "Utility functions for stage setup"
         },
-        "debug": {
-            "debugPanel.ts": "Displays debug information such as game state and player inputs"
+        ✔"debug": {
+            ✔"debugPanel.ts": "Displays debug information such as game state and player inputs"
         },
-        "app.ts": "Entry point for game initialization",
-        "styles.css": "Global CSS file for the project"
+        ✔"app.ts": "Entry point for game initialization",
+        ✔"styles.css": "Global CSS file for the project"
     },
     ".gitignore": "Git ignore file",
     "index.html": "Main HTML file",

@@ -1,5 +1,5 @@
 import { Application, VERSION } from "pixi.js";
-import { gameStage } from "../stages/stageVault";
+import { gameStage } from "./stages/stageVault";
 
 async function main() {
     const app = new Application();

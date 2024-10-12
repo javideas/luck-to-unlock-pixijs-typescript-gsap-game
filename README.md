@@ -60,7 +60,7 @@ This project is a mini game where the player must unlock a vault to reveal a tre
             "config.ts": "Holds game constants and configuration values"
         },
         "core": {
-            "app.ts": "Entry point for game initialization",
+            "index.ts": "Entry point for game initialization",
             "assetLoader.ts": "Handles loading of assets (images, sounds, etc.)",
             "gameManager.ts": "Manage game",
             "gameState.ts": "Track and Update game progression",

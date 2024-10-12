@@ -1,4 +1,4 @@
-import { Application, Container, Sprite } from "pixi.js";
+import { Application, Container, Sprite, Texture } from "pixi.js";
 import { loadImgAssets } from "../core/assetsLoader";
 
 export async function gameStage(app: Application) {
@@ -21,7 +21,7 @@ function initBg(app: Application, container: Container, imgAssets: any) {
     fitToScreen(app, container, bankBgSprite);
 }
 
-function fitToScreen(app: Application, container: Container, texture: Texture)
+function fitToScreen(app: Application, container: Container, texture: Sprite)
 {
     app.ticker.add(() => {
         const scaleFactor = app.screen.width / texture.width;

@@ -1,19 +1,27 @@
+import { Application, Container } from 'pixi.js';
 import { GameState } from './gameState';
-import { Application } from 'pixi.js';
-import { initStageVault } from '../stages/stageVault';
+import { initDebugPanel } from '../utils/stageUtils';
+import { loadImgAssets } from '../utils/assetsLoader';
+import { initStageVault, loadDoorWithHandle } from '../stages/stageVault';
 
 class GameManager {
-    private gameState: GameState;
     private app: Application;
+    private gameState: GameState;
+    private stageContainer: Container;
 
     constructor(app: Application) {
         this.app = app;
-        this.gameState = new GameState();
-        this.startGame();
+        this.stageContainer = new Container();
+        this.startGame(app);
     }
 
-    private startGame() {
-        initStageVault(this.app);
+    private async startGame(app: Application) {
+        this.app.stage.addChild(this.stageContainer);
+        const imgAssets = await loadImgAssets();
+
+        initStageVault(this.app, this.stageContainer, imgAssets);
+
+        initDebugPanel(this.app, this.stageContainer);
     }
 }
 

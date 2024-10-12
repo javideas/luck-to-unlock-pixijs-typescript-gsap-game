@@ -2,16 +2,9 @@ import { Application, Container, Graphics, Text, Sprite } from "pixi.js";
 import { loadImgAssets } from "../core/assetsLoader";
 import { initDebugPanel, fitToScreen } from "../utils/stageUtils";
 
-export async function initStageVault(app: Application) {
-    const imgAssets = await loadImgAssets();
-
-    const stageContainer = new Container();
-    app.stage.addChild(stageContainer);
-
+export async function initStageVault(app: Application, stageContainer: Container, imgAssets: any) {
     initBg(app, stageContainer, imgAssets);
     loadDoorWithHandle(stageContainer, imgAssets);
-
-    initDebugPanel(app, stageContainer);
 }
 
 function initBg(app: Application, container: Container, imgAssets: any) {

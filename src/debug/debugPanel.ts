@@ -1,29 +1,37 @@
-import { Container, Graphics, Text } from 'pixi.js';
+import { Container, Graphics, Application } from 'pixi.js';
+import { createText, positionText } from '../utils/textUtils';
 
 export function createDebugPanel(app: Application, posX: number, posY: number): Container {
-    posX = posX || app.screen.width;
-    posY = posY || app.screen.height * -1;
     const scaleFactor = 2;
-    const textPadding = 15;
-    const panelWidth = 300;
-    const panelHeight = 300;
+    const textPadding = 35;
     const panel = new Container();
+
+    const titleText = createText('Debug Panel', {
+        fontSize: 44 * scaleFactor,
+        fill: 'white'
+    }, 0, 0);
+
+    const infoText = createText('Additional Info', {
+        fontSize: 32 * scaleFactor,
+        fill: 'lightgray'
+    }, 0, 50);
+
+    positionText(titleText, panel, 0, 0);
+    positionText(infoText, panel, 0, 0);
+
+    const panelWidth = Math.max(titleText.width, infoText.width) + textPadding * 2;
+    const panelHeight = titleText.height + infoText.height + textPadding * 2;
 
     const background = new Graphics();
     background.beginFill(0x333333, 0.8);
-    background.drawRoundedRect(-(panelWidth / 2) * scaleFactor, -(panelHeight / 2), panelWidth * scaleFactor, panelHeight * scaleFactor);
+    background.drawRoundedRect(0, 0, panelWidth, panelHeight);
     background.endFill();
-    panel.addChild(background);
+    panel.addChildAt(background, 0);
 
-    const text = new Text('Debug Panel', {
-        fontSize: 44 * scaleFactor,
-        fill: 'white'
-    });
-    text.anchor.set(0, 1);
-    text.position.set((-(panelWidth / 2) * scaleFactor) + textPadding * scaleFactor, 0);
-    panel.addChild(text);
+    titleText.position.set(textPadding, textPadding);
+    infoText.position.set(textPadding, titleText.height + textPadding);
+
     panel.position.set(posX, posY);
 
     return panel;
 }
-

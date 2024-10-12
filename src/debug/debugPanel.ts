@@ -54,10 +54,23 @@ function calculatePanelDimensions(titleText: Text, infoTexts: Text[], textPaddin
     return { width: maxWidth, height: totalHeight };
 }
 
+function createColoredButton(width: number, height: number, color: number, scaleFactor: number): Graphics {
+    const button = new Graphics();
+    button.beginFill(color);
+    button.drawRoundedRect(0, 0, width * scaleFactor, height * scaleFactor, 10);
+    button.endFill();
+    button.eventMode = 'static'; // Use 'static' or 'dynamic' based on your needs
+    button.buttonMode = true; // Show a hand cursor on hover
+    return button;
+}
+
 export function createDebugPanel(app: Application, posX: number, posY: number): Container {
     const scaleFactor = 2;
     const textPadding = 35;
     const titlePadding = 20;
+    const buttonPadding = 120; // Padding between text and button
+    const buttonWidth = 100;
+    const buttonHeight = 50;
     const panel = new Container();
 
     const titleText = createTitleText("Debug Panel", scaleFactor);
@@ -80,6 +93,28 @@ export function createDebugPanel(app: Application, posX: number, posY: number): 
             titleText.height + textPadding + titlePadding + textPadding * index + infoTexts.slice(0, index).reduce((sum, t) => sum + t.height, 0)
         );
     });
+
+    // Create and position the button
+    const button = createColoredButton(buttonWidth, buttonHeight, 0xFF0000, scaleFactor);
+    button.position.set(panelWidth - buttonWidth - buttonPadding, textPadding); // Align to the right side
+    panel.addChild(button);
+
+    // Add event listener to toggle infoTexts visibility
+    button.on('pointerdown', () => {
+        console.log('Button pressed!');
+        const isVisible = infoTexts[0].visible;
+        infoTexts.forEach(text => text.visible = !isVisible);
+
+        // Adjust panel size
+        const newHeight = isVisible ? titleText.height + textPadding * 2 : panelHeight;
+        background.height = newHeight;
+    });
+
+    // Start open and toggle off after a short delay
+    setTimeout(() => {
+        infoTexts.forEach(text => text.visible = false);
+        background.height = titleText.height + textPadding * 2;
+    }, 100); // Adjust delay as needed
 
     panel.position.set(posX, posY);
 

@@ -32,18 +32,18 @@ This project is a mini game where the player must unlock a vault to reveal a tre
 - **Vite**: For building and serving the project.
 
 ## Project Structure
-```json
+```
 {
+    "public": {
+        "fonts": "The font assets",
+        "images": "The image assets",
+        "sounds": "The sound assets"
+    },
     "src": {
         "animations": {
             "vaultAnims.ts": "Animations related to the door",
             "handleAnims.ts": "Animations related to the handle",
             "treasureAnims.ts": "Glitter and shine animations"
-        },
-        "assets": {
-            "fonts": "The font assets",
-            "images": "The image assets",
-            "sounds": "The sound assets"
         },
         "config": {
             "config.ts": "Holds game constants and configuration values"
@@ -91,9 +91,8 @@ This project is a mini game where the player must unlock a vault to reveal a tre
     "tsconfig.json": "TypeScript configuration",
     "vite.config.ts": "Vite configuration"
 }
-```
 
+```
 ## Contribution Guidelines
 - Follow the Conventional Commits specification for commit messages.
 - Ensure branches are named using kebab-case.
-

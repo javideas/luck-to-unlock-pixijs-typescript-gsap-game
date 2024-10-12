@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:github": "cross-env NODE_ENV=github vite build --mode github",
     "serve": "vite preview",
     "deploy": "gh-pages -d dist",
     "clean": "rimraf ./dist"
@@ -33,6 +32,7 @@
   },
   "dependencies": {
     "gsap": "^3.12.5",
-    "pixi.js": "^8.5.0"
+    "pixi.js": "^8.5.0",
+    "which": "^5.0.0"
   }
 }

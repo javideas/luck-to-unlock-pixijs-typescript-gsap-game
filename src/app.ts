@@ -1,5 +1,5 @@
 import { Application, VERSION } from "pixi.js";
-import { gameStage } from "./stages/stageVault";
+import { initStageVault } from "./stages/stageVault";
 
 async function main() {
     const app = new Application();
@@ -11,7 +11,7 @@ async function main() {
     console.log('PixiJS app initialized. Version:', VERSION);
     document.body.appendChild(app.canvas);
 
-    gameStage(app);
+    initStageVault(app);
 }
 
 main().catch(console.error);

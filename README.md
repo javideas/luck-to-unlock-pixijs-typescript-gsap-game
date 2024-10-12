@@ -85,7 +85,8 @@ This project is a mini game where the player must unlock a vault to reveal a tre
         },
         "utils": {
             "combinationGenerator.ts": "Generates the random secret combination for the vault",
-            "combinationValidator.ts": "Validates player input against the secret combination"
+            "combinationValidator.ts": "Validates player input against the secret combination",
+            "stageUtils.ts": "Utility functions for stage setup"
         },
         "debug": {
             "debugPanel.ts": "Displays debug information such as game state and player inputs"

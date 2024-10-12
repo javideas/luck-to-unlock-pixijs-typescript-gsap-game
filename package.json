@@ -3,6 +3,7 @@
   "homepage": "https://javideas.github.io/luck-to-unlock-pixijs-typescript-gsap-game/",
   "version": "1.0.0",
   "description": "A mini game where players unlock a vault to reveal a treasure by entering a secret combination. Features include interactive gameplay, animations, and error handling. Implemented using PixiJS, TypeScript, and GSAP.",
+  "main": "src/app.ts",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -31,8 +32,9 @@
     "vite": "^5.4.8"
   },
   "dependencies": {
+    "@pixi/layout": "^2.0.1",
     "gsap": "^3.12.5",
-    "pixi.js": "^8.5.0",
+    "pixi.js": "^7.2.0",
     "which": "^5.0.0"
   }
 }

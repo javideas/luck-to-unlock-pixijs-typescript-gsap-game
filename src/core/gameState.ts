@@ -56,11 +56,11 @@ export default class GameState extends EventEmitter {
     }
 
     private checkRotation(direction: 'clockwise' | 'counterclockwise') {
-        if (this.currentStep >= this.currentCombination.length) {
-            console.log('All steps completed. Checking final result...');
-            this.checkFinalResult();
-            return;
-        }
+        // if (this.currentStep >= this.currentCombination.length) {
+        //     console.log('All steps completed. Checking final result...');
+        //     this.checkFinalResult();
+        //     return;
+        // }
 
         const currentPair = this.currentCombination[this.currentStep];
 
@@ -72,11 +72,13 @@ export default class GameState extends EventEmitter {
             if (currentPair.steps > 0) {
                 console.log(`Expected step ${this.currentStep + 1}: ${currentPair.steps} ${currentPair.direction}`);
             } else {
-                console.log(`Step ${this.currentStep + 1} completed`);
+                console.log(`Pair ${this.currentStep + 1} completed!.`);
                 this.currentStep++;
                 const remaining = this.getRemainingSteps();
                 if (remaining) {
                     console.log(`Expected step ${this.currentStep + 1}: ${remaining.steps} ${remaining.direction}`);
+                } else {
+                    this.winGame(); // Call the winning function
                 }
             }
         } else {
@@ -85,14 +87,26 @@ export default class GameState extends EventEmitter {
         }
     }
 
-    private checkFinalResult() {
-        if (this.currentCombination.every(pair => pair.number === 0)) {
-            console.log('Vault unlocked! Revealing treasure...');
-            this.emit('vaultUnlocked');
-        } else {
-            console.log('Combination incomplete. Resetting game...');
-            this.resetGame();
-        }
+    // private checkFinalResult() {
+    //     if (this.currentCombination.every(pair => pair.steps === 0)) {
+    //         console.log('Vault unlocked! Revealing treasure...');
+    //         this.emit('vaultUnlocked');
+    //     } else {
+    //         console.log('Combination incomplete. Resetting game...');
+    //         this.resetGame();
+    //     }
+    // }
+
+    private winGame() {
+        console.log('Congratulations! You have unlocked the vault!');
+        // Emit a win event for the GameManager to listen to
+        this.emit('gameWon');
+
+        // // Reset the game after a delay
+        // setTimeout(() => {
+        //     console.log('Resetting game for a new round...');
+        //     this.resetGame();
+        // }, 5000); // 5-second delay before resetting
     }
 
     private resetGame() {

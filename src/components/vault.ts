@@ -1,5 +1,6 @@
-import { Container, Sprite, Application } from 'pixi.js';
+import { Container, Sprite, Application, Texture } from 'pixi.js';
 import { HandleAnims } from '../core/animManagers/handleAnims';
+import { VaultAnims } from '../core/animManagers/vaultAnims';
 
 export class Vault {
     private app: Application;
@@ -10,12 +11,17 @@ export class Vault {
     public handleSprite: Sprite;
     public handleShadowSprite: Sprite;
     private handleAnims: HandleAnims;
+    private vaultAnims: VaultAnims;
 
     constructor(app: Application, container: Container, imgAssets: any) {
         this.app = app;
         this.container = container;
         this.initVault(imgAssets);
         this.handleAnims = new HandleAnims(this.handleSprite, this.handleShadowSprite);
+
+        // Initialize VaultAnims with door sprite and open texture
+        const doorOpenTexture = imgAssets.doorOpen;
+        this.vaultAnims = new VaultAnims(this.doorSprite, doorOpenTexture);
     }
 
     private initVault(imgAssets: any) {

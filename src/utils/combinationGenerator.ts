@@ -12,7 +12,7 @@ class CombinationGenerator extends EventEmitter {
 
         for (let i = 0; i < 3; i++) {
             const direction = directions[Math.floor(Math.random() * directions.length)];
-            const steps = Math.floor(Math.random() * 9) + 1;
+            const steps = Math.floor(Math.random() * 1) + 1;
             combination.push({ direction, steps });
         }
         this.emit('newCombination', combination);

@@ -61,6 +61,7 @@ export class Manager {
             Manager.gameState.on('combinationChanged', (combination: CombinationPair[]) => {
                 updateDebugPanel(Manager.debugPanel, combination);
             });
+            Manager.gameState.on('gameWon', Manager.onhandleGameWon.bind(this));
         
             Manager.playerState = new PlayerState(Manager.app, Manager.gameState, Manager.vault.getHandleSprite());
             Manager.gameState.setPlayerState(Manager.playerState);
@@ -72,6 +73,7 @@ export class Manager {
             Manager.inputManager.init();
 
             Manager.playerState.on('rotateHandle', Manager.onRotateHandle.bind(this));
+            // Manager.gameState.on('gameWon', Manager.onhandleGameWon.bind(this));
         } else {
             console.error('Vault not initialized properly');
         }
@@ -89,6 +91,11 @@ export class Manager {
 
     private static onRotateHandle(direction: 'clockwise' | 'counterclockwise') {
         Manager.vault.rotateHandle(direction);
+    }
+
+    private static onhandleGameWon() {
+        console.log('GameManager: Player has won the game!');
+        Manager.vault.vaultAnims.openDoor();
     }
 
     public static resize(): void {
@@ -110,6 +117,4 @@ export class Manager {
         view.style.marginLeft = view.style.marginRight = horizontalMargin + "px";
         view.style.marginTop = view.style.marginBottom = verticalMargin + "px";
     }
-
-    /* More code of your Manager.ts like `changeScene` and `update` */
 }

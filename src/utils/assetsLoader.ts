@@ -4,6 +4,7 @@ const imgFolderPath = './assets/images/';
 const assetsPaths = {
   bankBg: imgFolderPath + 'bg.png',
   doorClosed: imgFolderPath + 'door.png',
+  doorOpen: imgFolderPath + 'doorOpen.png',
   handle: imgFolderPath + 'handle.png',
   handleShadow: imgFolderPath + 'handleShadow.png',
 };

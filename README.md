@@ -46,34 +46,33 @@ This project is a mini game where the player must unlock a vault to reveal a tre
 ```
 {
     ✔"public": {
-        "fonts": "The font assets",
         ✔"images": "The image assets",
         "sounds": "The sound assets"
     },
     ✔"src": {
+        "components": {
+            ✔"handle.ts": "Manages vault handle sprite and rotations",
+            "timer.ts": "Manages time counter display",
+            "treasure.ts": "Manages treasure sprite and animations",
+            ✔"vault.ts": "Manages vault door sprite and state"
+        },
         ✔"config": {
             ✔"progressConfig.json": "Configuration for progress tracking",
         },
+        ✔"controllers": {
+            ✔"inputManager.ts": "Manages user input (click, drag, etc.)"
+        },
         ✔"core": {
             "animManagers": {
-                "vaultAnims.ts": "Animations related to the door",
-                "handleAnims.ts": "Animations related to the handle",
-                "treasureAnims.ts": "Glitter and shine animations"
+                ✔"handleAnims.ts": "Animations related to the handle",
+                "treasureAnims.ts": "Glitter and shine animations",
+                "vaultAnims.ts": "Animations related to the door"
             },
             ✔"assetLoader.ts": "Handles loading of assets (images, sounds, etc.)",
             ✔"gameManager.ts": "Manage game",
             ✔"gameState.ts": "Track and Update game progression",
             ✔"playerState.ts": "Track and Update player progression",
             "soundManager.ts": "Manages sound effects"
-        },
-        "components": {
-            "handle.ts": "Manages vault handle sprite and rotations",
-            "timer.ts": "Manages time counter display",
-            "treasure.ts": "Manages treasure sprite and animations",
-            "vault.ts": "Manages vault door sprite and state"
-        },
-        ✔"controllers": {
-            ✔"inputManager.ts": "Manages user input (click, drag, etc.)"
         },
         ✔"stages": {
             ✔"stageVault.ts": "Handles the vault stage setup and interactions"

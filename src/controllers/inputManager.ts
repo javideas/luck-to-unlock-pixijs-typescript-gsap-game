@@ -15,10 +15,16 @@ export default class InputManager {
         this.app.stage.eventMode = 'static';
         this.app.stage.hitArea = this.app.screen;
         this.app.stage.on('pointerdown', this.handlePointerDown.bind(this));
+        this.app.stage.on('pointerup', this.handlePointerUp.bind(this));
     }
 
     private handlePointerDown(event: PIXI.FederatedPointerEvent) {
         const position = event.global;
         this.playerState.handleInput('pointerdown', { x: position.x, y: position.y });
+    }
+
+    private handlePointerUp(event: PIXI.FederatedPointerEvent) {
+        const position = event.global;
+        this.playerState.handleInput('pointerup', { x: position.x, y: position.y });
     }
 }

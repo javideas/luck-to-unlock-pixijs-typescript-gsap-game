@@ -5,6 +5,7 @@ import InputManager from '../controllers/inputManager';
 import { loadImgAssets } from '../utils/assetsLoader';
 import { initStageVault } from '../stages/stageVault';
 import { createDebugPanel, updateDebugPanel } from '../debug/debugPanel';
+import { CombinationPair } from '../utils/combinationGenerator';
 
 class GameManager {
     private app: Application;
@@ -17,8 +18,8 @@ class GameManager {
     constructor(app: Application) {
         this.app = app;
         this.stageContainer = new Container();
-        this.gameState = new GameState();
-        this.playerState = new PlayerState(this.gameState);
+        this.gameState = new GameState(this.app);
+        this.playerState = new PlayerState(this.app, this.gameState);
         this.inputManager = new InputManager(this.app, this.playerState);
         this.startGame();
     }
@@ -29,18 +30,27 @@ class GameManager {
 
         initStageVault(this.app, this.stageContainer, imgAssets);
         
-        // Create and store the debug panel
-        this.debugPanel = createDebugPanel(this.app, this.app.screen.width / 2 + 400, (this.app.screen.height * -0.5) - 800);
-        this.stageContainer.addChild(this.debugPanel);
+        this.initDebugPanel();
 
         this.gameState.on('combinationChanged', this.onCombinationChanged.bind(this));
+        this.playerState.on('rotateHandle', this.rotateHandle.bind(this));
 
-        // InputManager now handles input events
         this.inputManager.init();
+    }
+
+    private initDebugPanel() {
+        const panelX = this.app.screen.width / 2 + 400;
+        const panelY = this.app.screen.height * -1.7;
+        this.debugPanel = createDebugPanel(this.app, panelX, panelY);
+        this.stageContainer.addChild(this.debugPanel);
     }
 
     private onCombinationChanged(combination: CombinationPair[]) {
         updateDebugPanel(this.debugPanel, combination);
+    }
+
+    private rotateHandle(direction: 'left' | 'right') {
+        console.log(`GameManager: Rotating handle ${direction}`);
     }
 }
 

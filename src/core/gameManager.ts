@@ -46,7 +46,6 @@ export class Manager {
         window.addEventListener("orientationchange", Manager.resize);
         window.addEventListener("resize", Manager.resize);
 
-        
         Manager.app.stage.addChild(Manager.stageContainer);
         const imgAssets = await loadImgAssets();
         Manager.vault = await initStageVault(Manager.app, Manager.stageContainer, imgAssets);

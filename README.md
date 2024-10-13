@@ -52,8 +52,7 @@ This project is a mini game where the player must unlock a vault to reveal a tre
     ✔"src": {
         "components": {
             ✔"handle.ts": "Manages vault handle sprite and rotations",
-            "timer.ts": "Manages time counter display",
-            "treasure.ts": "Manages treasure sprite and animations",
+            ✔"timer.ts": "Manages time counter display",
             ✔"vault.ts": "Manages vault door sprite and state"
         },
         ✔"config": {
@@ -65,8 +64,7 @@ This project is a mini game where the player must unlock a vault to reveal a tre
         ✔"core": {
             "animManagers": {
                 ✔"handleAnims.ts": "Animations related to the handle",
-                "treasureAnims.ts": "Glitter and shine animations",
-                "vaultAnims.ts": "Animations related to the door"
+                ✔"vaultAnims.ts": "Animations related to the door"
             },
             ✔"assetLoader.ts": "Handles loading of assets (images, sounds, etc.)",
             ✔"gameManager.ts": "Manage game",
@@ -77,14 +75,8 @@ This project is a mini game where the player must unlock a vault to reveal a tre
         ✔"stages": {
             ✔"stageVault.ts": "Handles the vault stage setup and interactions"
         },
-        "types": {
-            "animationTypes.ts": "TypeScript interfaces and types for animations",
-            "eventTypes.ts": "TypeScript interfaces and types for events",
-            "gameTypes.ts": "TypeScript interfaces and types for game objects"
-        },
         ✔"utils": {
             ✔"combinationGenerator.ts": "Generates the random secret combination for the vault",
-            "combinationValidator.ts": "Validates player input against the secret combination",
             ✔"stageUtils.ts": "Utility functions for stage setup"
         },
         ✔"debug": {

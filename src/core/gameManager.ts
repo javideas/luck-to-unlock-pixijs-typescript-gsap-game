@@ -48,7 +48,7 @@ class GameManager {
 
     private initDebugPanel() {
         const panelX = this.app.screen.width / 2 + 400;
-        const panelY = this.app.screen.height * -1.7;
+        const panelY = this.app.screen.height * -1.2;
         this.debugPanel = createDebugPanel(this.app, panelX, panelY);
         this.stageContainer.addChild(this.debugPanel);
     }

@@ -15,7 +15,6 @@ class CombinationGenerator extends EventEmitter {
             const steps = Math.floor(Math.random() * 9) + 1;
             combination.push({ direction, steps });
         }
-        console.log('Generated combination:', combination);
         this.emit('newCombination', combination);
     }
 

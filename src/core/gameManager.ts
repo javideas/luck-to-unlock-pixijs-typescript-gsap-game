@@ -63,7 +63,6 @@ class GameManager {
     }
 
     private onRotateHandle(direction: 'clockwise' | 'counterclockwise') {
-        console.log(`GameManager: Player rotates handle ${direction}`);
         this.vault.rotateHandle(direction);
     }
 }

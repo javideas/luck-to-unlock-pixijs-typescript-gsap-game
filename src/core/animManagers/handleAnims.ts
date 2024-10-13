@@ -19,7 +19,6 @@ export class HandleAnims extends EventEmitter {
 
         const directionMultiplier = direction === 'clockwise' ? 1 : -1;
 
-        console.log(`Rotating handle ${direction}`);
         const timeline = gsap.timeline();
         timeline.to([this.handle, this.handleShadow], {
             rotation: "+=" + (-anticipation * directionMultiplier),

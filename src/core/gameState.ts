@@ -103,13 +103,14 @@ export default class GameState extends EventEmitter {
 
     private resetGame() {
         this.emit('gameReset');
+        this.handleAnims.spinsCrazy();
         this.resetCombination();
     }
 
     private resetCombination() {
         this.currentStep = 0;
+        this.handleAnims.spinsCrazy();
         this.generateNewCombination();
-
     }
 
     private generateNewCombination() {

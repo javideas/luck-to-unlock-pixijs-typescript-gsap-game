@@ -12,8 +12,9 @@ export class HandleAnims extends EventEmitter {
         this.handleShadow = handleShadow;
     }
 
-    rotateHandle(direction: 'clockwise' | 'counterclockwise') {
-        const rotationIncrement = 110 * (Math.PI / 180);
+    rotateHandle(direction: 'clockwise' | 'counterclockwise', spinCrazy: boolean = false, rotIncrement?: number) {
+        const defaultRotationIncrement = 110 * (Math.PI / 180);
+        const rotationIncrement = rotIncrement || defaultRotationIncrement;
         const anticipation = 0.05;
         const overshoot = 0.3;
 
@@ -36,8 +37,32 @@ export class HandleAnims extends EventEmitter {
             ease: "power1.out",
             onComplete: () => {
                 console.log('Handle rotation complete', { handleRotation: direction });
-                this.emit('rotationComplete', direction);
+                if (spinCrazy) {
+                    this.emit('spinCrazyComplete', direction);
+                } else {
+                    this.emit('rotationComplete', direction);
+                }
             }
         });
+    }
+
+    spinsCrazy() {
+        const spinDuration = 1000;
+        const startTime = performance.now();
+
+        const spinLoop = () => {
+            const currentTime = performance.now();
+            if (currentTime - startTime < spinDuration) {
+                const randomDirection = Math.random() > 0.5 ? 'clockwise' : 'counterclockwise';
+                const randomRotationIncrement = (Math.random() * 180 + 60) * (Math.PI / 180);
+                this.rotateHandle(randomDirection, true, randomRotationIncrement);
+                requestAnimationFrame(spinLoop);
+            } else {
+                console.log('Crazy spin complete');
+                this.emit('spinCrazyComplete');
+            }
+        };
+
+        spinLoop();
     }
 }

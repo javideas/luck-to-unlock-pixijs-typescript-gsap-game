@@ -65,6 +65,20 @@ function createColoredButton(width: number, height: number, color: number, scale
     return button;
 }
 
+function delay(ms: number): Promise<void> {
+    return new Promise(resolve => {
+        const start = Date.now();
+        const check = () => {
+            if (Date.now() - start >= ms) {
+                resolve();
+            } else {
+                requestAnimationFrame(check);
+            }
+        };
+        requestAnimationFrame(check);
+    });
+}
+
 export function createDebugPanel(app: Application, posX: number, posY: number): Container {
     const scaleFactor = 2;
     const textPadding = 35;
@@ -112,10 +126,10 @@ export function createDebugPanel(app: Application, posX: number, posY: number): 
     });
 
     // Start open and toggle off after a short delay
-    setTimeout(() => {
+    delay(100).then(() => {
         infoTexts.forEach(text => text.visible = false);
         background.height = titleText.height + textPadding * 2;
-    }, 100); // Adjust delay as needed
+    });
 
     panel.position.set(posX, posY);
 

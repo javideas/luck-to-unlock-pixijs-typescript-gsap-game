@@ -43,8 +43,9 @@ export class Manager {
             height: height
         });
 
+        window.addEventListener("orientationchange", Manager.resize);
         window.addEventListener("resize", Manager.resize);
-        Manager.resize();
+
 
         Manager.app.stage.addChild(Manager.stageContainer);
         const imgAssets = await loadImgAssets();
@@ -67,12 +68,13 @@ export class Manager {
         }
 
         Manager.initDebugPanel();
+        Manager.resize();
         Manager.gameState.on('combinationChanged', Manager.onCombinationChanged.bind(this));
     }
 
     private static initDebugPanel() {
-        const panelX = Manager.app.screen.width / 2 + 400;
-        const panelY = Manager.app.screen.height * -1.2;
+        const panelX = Manager.app.screen.width / 5 ;
+        const panelY = Manager.app.screen.height / -2.5;
         Manager.debugPanel = createDebugPanel(Manager.app, panelX, panelY);
         Manager.stageContainer.addChild(Manager.debugPanel);
     }

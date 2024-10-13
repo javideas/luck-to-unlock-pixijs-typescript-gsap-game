@@ -29,6 +29,14 @@ export default class GameState extends EventEmitter {
             this.currentStep = 0;
             this.emit('combinationChanged', this.currentCombination);
             console.log('New combination:', this.currentCombination);
+
+            // Log the initial expected step and direction
+            const remaining = this.getRemainingSteps();
+            if (remaining) {
+                console.log(`Expected step ${this.currentStep + 1}: ${remaining.steps} ${remaining.direction}`);
+            } else {
+                console.error('Error: No remaining steps available.');
+            }
         });
 
         // Generate the initial combination
@@ -39,6 +47,14 @@ export default class GameState extends EventEmitter {
         return this.currentCombination;
     }
 
+    private getRemainingSteps(): { steps: number, direction: string } | null {
+        if (this.currentStep < this.currentCombination.length) {
+            const currentPair = this.currentCombination[this.currentStep];
+            return { steps: currentPair.steps, direction: currentPair.direction };
+        }
+        return null;
+    }
+
     private checkRotation(direction: 'clockwise' | 'counterclockwise') {
         if (this.currentStep >= this.currentCombination.length) {
             console.log('All steps completed. Checking final result...');
@@ -47,12 +63,21 @@ export default class GameState extends EventEmitter {
         }
 
         const currentPair = this.currentCombination[this.currentStep];
+
         if (direction === currentPair.direction) {
             console.log(`Correct direction for step ${this.currentStep + 1}`);
-            currentPair.number--;
-            if (currentPair.number === 0) {
+            currentPair.steps--;  // Decrement the steps as the player progresses
+
+            // Log the expected next step and direction after decrementing
+            if (currentPair.steps > 0) {
+                console.log(`Expected step ${this.currentStep + 1}: ${currentPair.steps} ${currentPair.direction}`);
+            } else {
                 console.log(`Step ${this.currentStep + 1} completed`);
                 this.currentStep++;
+                const remaining = this.getRemainingSteps();
+                if (remaining) {
+                    console.log(`Expected step ${this.currentStep + 1}: ${remaining.steps} ${remaining.direction}`);
+                }
             }
         } else {
             console.log('Incorrect direction. Resetting game...');

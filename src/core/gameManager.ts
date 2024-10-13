@@ -46,13 +46,22 @@ export class Manager {
         window.addEventListener("orientationchange", Manager.resize);
         window.addEventListener("resize", Manager.resize);
 
-
+        
         Manager.app.stage.addChild(Manager.stageContainer);
         const imgAssets = await loadImgAssets();
         Manager.vault = await initStageVault(Manager.app, Manager.stageContainer, imgAssets);
-
+        
         if (Manager.vault) {
             Manager.gameState = new GameState();
+            
+            Manager.initDebugPanel();
+
+            updateDebugPanel(Manager.debugPanel, Manager.gameState.getCurrentCombination());
+
+            Manager.gameState.on('combinationChanged', (combination: CombinationPair[]) => {
+                updateDebugPanel(Manager.debugPanel, combination);
+            });
+        
             Manager.playerState = new PlayerState(Manager.app, Manager.gameState, Manager.vault.getHandleSprite());
             Manager.gameState.setPlayerState(Manager.playerState);
 
@@ -67,9 +76,8 @@ export class Manager {
             console.error('Vault not initialized properly');
         }
 
-        Manager.initDebugPanel();
+
         Manager.resize();
-        Manager.gameState.on('combinationChanged', Manager.onCombinationChanged.bind(this));
     }
 
     private static initDebugPanel() {
@@ -79,15 +87,12 @@ export class Manager {
         Manager.stageContainer.addChild(Manager.debugPanel);
     }
 
-    private static onCombinationChanged(combination: CombinationPair[]) {
-        updateDebugPanel(Manager.debugPanel, combination);
-    }
-
     private static onRotateHandle(direction: 'clockwise' | 'counterclockwise') {
         Manager.vault.rotateHandle(direction);
     }
 
     public static resize(): void {
+        console.log('Resizing');
         const screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 

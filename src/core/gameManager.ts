@@ -20,8 +20,6 @@ class GameManager {
         this.app = app;
         this.stageContainer = new Container();
         this.gameState = new GameState();
-        this.playerState = new PlayerState(this.app, this.gameState);
-        this.gameState.setPlayerState(this.playerState);
         this.startGame();
     }
 
@@ -33,8 +31,13 @@ class GameManager {
         this.handleSprite = handleSprite;
 
         if (this.handleSprite) {
+            this.playerState = new PlayerState(this.app, this.gameState, this.handleSprite);
+            this.gameState.setPlayerState(this.playerState);
             this.inputManager = new InputManager(this.app, this.playerState, this.handleSprite);
             this.inputManager.init();
+
+            // Add debug quadrants
+            this.inputManager.createDebugQuadrants(this.stageContainer);
         } else {
             console.error('Handle sprite not initialized properly');
         }

@@ -19,7 +19,7 @@ export default class GameState extends EventEmitter {
     private initializeGame() {
         combinationGenerator.on('newCombination', (combination: CombinationPair[]) => {
             this.currentCombination = combination;
-            console.log('New combination received:', this.currentCombination);
+            // console.log('New combination received:', this.currentCombination);
             this.emit('combinationChanged', this.currentCombination);
         });
 
@@ -33,7 +33,7 @@ export default class GameState extends EventEmitter {
     }
 
     private rotateHandle(direction: 'clockwise' | 'counterclockwise') {
-        console.log(`GameState: Player rotates handle ${direction}`);
+        // console.log(`GameState: Player rotates handle ${direction}`);
 
     }
 

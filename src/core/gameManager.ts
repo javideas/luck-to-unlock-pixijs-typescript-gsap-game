@@ -36,8 +36,7 @@ class GameManager {
             this.inputManager = new InputManager(this.app, this.playerState, this.handleSprite);
             this.inputManager.init();
 
-            // Add debug quadrants
-            this.inputManager.createDebugQuadrants(this.stageContainer);
+            // this.inputManager.createDebugQuadrants(this.stageContainer);
         } else {
             console.error('Handle sprite not initialized properly');
         }

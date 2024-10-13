@@ -23,30 +23,14 @@ export default class InputManager {
     private handlePointerDown(event: PIXI.FederatedPointerEvent) {
         const position = event.global;
         const quadrant = this.determineQuadrant(position.x, position.y);
-        console.log('Pointer down:', {
-            x: position.x,
-            y: position.y,
-            quadrant: quadrant,
-            handleCenter: {
-                x: this.handleSprite.x + this.handleSprite.width / 2,
-                y: this.handleSprite.y + this.handleSprite.height / 2
-            }
-        });
+
         this.playerState.handleInput('pointerdown', { x: position.x, y: position.y, quadrant: quadrant });
     }
 
     private handlePointerUp(event: PIXI.FederatedPointerEvent) {
         const position = event.global;
         const quadrant = this.determineQuadrant(position.x, position.y);
-        console.log('Pointer up:', {
-            x: position.x,
-            y: position.y,
-            quadrant: quadrant,
-            handleCenter: {
-                x: this.handleSprite.x + this.handleSprite.width / 2,
-                y: this.handleSprite.y + this.handleSprite.height / 2
-            }
-        });
+
         this.playerState.handleInput('pointerup', { x: position.x, y: position.y, quadrant: quadrant });
     }
 

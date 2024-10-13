@@ -33,7 +33,7 @@ export default class GameState extends EventEmitter {
     }
 
     private rotateHandle(direction: 'clockwise' | 'counterclockwise') {
-        // console.log(`GameState: Player rotates handle ${direction}`);
+        console.log(`GameState: Player rotates handle ${direction}`);
 
     }
 

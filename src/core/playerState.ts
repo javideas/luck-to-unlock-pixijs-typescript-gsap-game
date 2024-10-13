@@ -10,6 +10,7 @@ export default class PlayerState extends EventEmitter {
     private startX: number = 0;
     private startY: number = 0;
     private isDragging: boolean = false;
+    private startQuadrant: string = '';
 
     // Use config values for initial state
     private playerDirection: number = parseInt(progressConfig.infoTexts.p_dir.value);
@@ -28,17 +29,13 @@ export default class PlayerState extends EventEmitter {
             this.isDragging = true;
             this.startX = data.x;
             this.startY = data.y;
-            
-            // console.log('Touch started in quadrant:', data.quadrant, {
-            //     touchPosition: { x: this.startX, y: this.startY },
-            //     quadrant: data.quadrant
-            // });
+            this.startQuadrant = data.quadrant;
 
         } else if (type === 'pointerup' && this.isDragging) {
             this.isDragging = false;
             const endX = data.x;
             const endY = data.y;
-            this.determineDirectionAndEmit(this.startX, this.startY, endX, endY, data.quadrant);
+            this.determineDirectionAndEmit(endX, endY);
         }
     }
 
@@ -65,15 +62,13 @@ export default class PlayerState extends EventEmitter {
         });
     }
 
-    private determineDirectionAndEmit(startX: number, startY: number, endX: number, endY: number, startQuadrant: string) {
-        const deltaX = endX - startX;
-        const deltaY = endY - startY;
-
-        // console.log('Movement delta:', { deltaX, deltaY, startQuadrant });
+    private determineDirectionAndEmit(endX: number, endY: number) {
+        const deltaX = endX - this.startX;
+        const deltaY = endY - this.startY;
 
         let direction: 'clockwise' | 'counterclockwise';
 
-        switch (startQuadrant) {
+        switch (this.startQuadrant) {
             case 'topLeft':
                 direction = this.determineDirectionTopLeft(deltaX, deltaY);
                 break;
@@ -91,13 +86,10 @@ export default class PlayerState extends EventEmitter {
                 return;
         }
 
-        // console.log('Direction determined:', {
-        //     quadrant: startQuadrant,
-        //     direction: direction,
-        //     start: { x: startX, y: startY },
-        //     end: { x: endX, y: endY },
-        //     delta: { x: deltaX, y: deltaY }
-        // });
+        console.log('Direction determined:', {
+            quadrant: this.startQuadrant,
+            direction: direction
+        });
 
         this.updatePlayerProgress(direction);
         this.emit('rotateHandle', direction);

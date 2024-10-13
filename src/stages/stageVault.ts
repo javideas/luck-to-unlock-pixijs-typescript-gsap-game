@@ -4,7 +4,9 @@ import { initDebugPanel, fitToScreen } from "../utils/stageUtils";
 
 export async function initStageVault(app: Application, stageContainer: Container, imgAssets: any) {
     initBg(app, stageContainer, imgAssets);
-    loadDoorWithHandle(stageContainer, imgAssets);
+    const handleSprite = loadDoorWithHandle(stageContainer, imgAssets);
+
+    return { handleSprite };
 }
 
 function initBg(app: Application, container: Container, imgAssets: any) {
@@ -16,7 +18,7 @@ function initBg(app: Application, container: Container, imgAssets: any) {
     fitToScreen(app, container, bankBgSprite);
 }
 
-function loadDoorWithHandle(container: Container, imgAssets: any) {
+function loadDoorWithHandle(container: Container, imgAssets: any): Sprite {
     const doorContainer = new Container();
 
     const doorTexture = imgAssets.doorClosed;
@@ -43,4 +45,6 @@ function loadDoorWithHandle(container: Container, imgAssets: any) {
     handleContainer.position.set(-40, -20);
     doorContainer.addChild(handleContainer);
     container.addChild(doorContainer);
+
+    return handleSprite;
 }

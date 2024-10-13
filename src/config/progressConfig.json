@@ -10,7 +10,7 @@
         },
         "p_pair": {
             "label": "Player Pair",
-            "value": "0"
+            "value": "1"
         },
         "expected_dir": {
             "label": "Expected Direction",

@@ -1,4 +1,4 @@
-import { Application, Container } from 'pixi.js';
+import { Application, Container, Sprite } from 'pixi.js';
 import GameState from './gameState';
 import PlayerState from './playerState';
 import InputManager from '../controllers/inputManager';
@@ -14,13 +14,14 @@ class GameManager {
     private inputManager: InputManager;
     private stageContainer: Container;
     private debugPanel: Container;
+    private handleSprite: Sprite;
 
     constructor(app: Application) {
         this.app = app;
         this.stageContainer = new Container();
-        this.gameState = new GameState(this.app);
+        this.gameState = new GameState();
         this.playerState = new PlayerState(this.app, this.gameState);
-        this.inputManager = new InputManager(this.app, this.playerState);
+        this.gameState.setPlayerState(this.playerState);
         this.startGame();
     }
 
@@ -28,14 +29,19 @@ class GameManager {
         this.app.stage.addChild(this.stageContainer);
         const imgAssets = await loadImgAssets();
 
-        initStageVault(this.app, this.stageContainer, imgAssets);
-        
+        const { handleSprite } = await initStageVault(this.app, this.stageContainer, imgAssets);
+        this.handleSprite = handleSprite;
+
+        if (this.handleSprite) {
+            this.inputManager = new InputManager(this.app, this.playerState, this.handleSprite);
+            this.inputManager.init();
+        } else {
+            console.error('Handle sprite not initialized properly');
+        }
+
         this.initDebugPanel();
 
         this.gameState.on('combinationChanged', this.onCombinationChanged.bind(this));
-        this.playerState.on('rotateHandle', this.rotateHandle.bind(this));
-
-        this.inputManager.init();
     }
 
     private initDebugPanel() {
@@ -47,10 +53,6 @@ class GameManager {
 
     private onCombinationChanged(combination: CombinationPair[]) {
         updateDebugPanel(this.debugPanel, combination);
-    }
-
-    private rotateHandle(direction: 'left' | 'right') {
-        console.log(`GameManager: Rotating handle ${direction}`);
     }
 }
 

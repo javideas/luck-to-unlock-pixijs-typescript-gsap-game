@@ -1,21 +1,23 @@
-import { Application } from 'pixi.js';
+import { Application, Sprite } from 'pixi.js';
 import PlayerState from '../core/playerState';
 
 export default class InputManager {
     private playerState: PlayerState;
     private app: Application;
+    private handleSprite: Sprite;
 
-    constructor(app: Application, playerState: PlayerState) {
+    constructor(app: Application, playerState: PlayerState, handleSprite: Sprite) {
         this.app = app;
         this.playerState = playerState;
+        this.handleSprite = handleSprite;
     }
 
     init() {
         // Use PixiJS's event system for both mouse and touch events
-        this.app.stage.eventMode = 'static';
-        this.app.stage.hitArea = this.app.screen;
-        this.app.stage.on('pointerdown', this.handlePointerDown.bind(this));
-        this.app.stage.on('pointerup', this.handlePointerUp.bind(this));
+        this.handleSprite.eventMode = 'static';
+        this.handleSprite.on('pointerdown', this.handlePointerDown.bind(this));
+        this.handleSprite.on('pointerup', this.handlePointerUp.bind(this));
+        this.handleSprite.on('pointerupoutside', this.handlePointerUp.bind(this));
     }
 
     private handlePointerDown(event: PIXI.FederatedPointerEvent) {

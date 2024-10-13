@@ -1,6 +1,6 @@
 import { Application, VERSION } from "pixi.js";
 // import GameManager from "./core/gameManager";
-import { Manager } from "./core/manager";
+import { Manager } from "./core/gameManager";
 
 function main() {
 

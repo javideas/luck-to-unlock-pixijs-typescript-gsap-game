@@ -1,4 +1,4 @@
-import { Application, Container, Sprite, Texture } from "pixi.js";
+import { Application, Container } from "pixi.js";
 import GameState from './gameState';
 import PlayerState from './playerState';
 import InputManager from '../controllers/inputManager';
@@ -13,11 +13,15 @@ export class Manager {
     private constructor() { }
 
     private static app: Application;
-    private static currentScene: IScene;
+    private static gameState: GameState;
+    private static playerState: PlayerState;
+    private static inputManager: InputManager;
+    private static stageContainer: Container = new Container();
+    private static debugPanel: Container;
+    private static vault: Vault;
 
     private static _width: number;
     private static _height: number;
-    private static stageContainer: Container = new Container();
 
     public static get width(): number {
         return Manager._width;
@@ -26,9 +30,7 @@ export class Manager {
         return Manager._height;
     }
 
-
-    public static async initialize(width: number, height: number, background: number): void {
-
+    public static async initialize(width: number, height: number, background: number): Promise<void> {
         Manager._width = width;
         Manager._height = height;
 
@@ -41,17 +43,46 @@ export class Manager {
             height: height
         });
 
-        // Manager.app.ticker.add(Manager.update)
-
-        // listen for the browser telling us that the screen size changed
         window.addEventListener("resize", Manager.resize);
-
-        // call it manually once so we are sure we are the correct size after starting
         Manager.resize();
 
         Manager.app.stage.addChild(Manager.stageContainer);
         const imgAssets = await loadImgAssets();
-        this.vault = await initStageVault(Manager.app, this.stageContainer, imgAssets);
+        Manager.vault = await initStageVault(Manager.app, Manager.stageContainer, imgAssets);
+
+        if (Manager.vault) {
+            Manager.gameState = new GameState();
+            Manager.playerState = new PlayerState(Manager.app, Manager.gameState, Manager.vault.getHandleSprite());
+            Manager.gameState.setPlayerState(Manager.playerState);
+
+            const handleAnims = Manager.vault.getHandleAnims();
+            Manager.gameState.setHandleAnims(handleAnims);
+
+            Manager.inputManager = new InputManager(Manager.app, Manager.playerState, Manager.vault.getHandleSprite());
+            Manager.inputManager.init();
+
+            Manager.playerState.on('rotateHandle', Manager.onRotateHandle.bind(this));
+        } else {
+            console.error('Vault not initialized properly');
+        }
+
+        Manager.initDebugPanel();
+        Manager.gameState.on('combinationChanged', Manager.onCombinationChanged.bind(this));
+    }
+
+    private static initDebugPanel() {
+        const panelX = Manager.app.screen.width / 2 + 400;
+        const panelY = Manager.app.screen.height * -1.2;
+        Manager.debugPanel = createDebugPanel(Manager.app, panelX, panelY);
+        Manager.stageContainer.addChild(Manager.debugPanel);
+    }
+
+    private static onCombinationChanged(combination: CombinationPair[]) {
+        updateDebugPanel(Manager.debugPanel, combination);
+    }
+
+    private static onRotateHandle(direction: 'clockwise' | 'counterclockwise') {
+        Manager.vault.rotateHandle(direction);
     }
 
     public static resize(): void {
@@ -73,5 +104,5 @@ export class Manager {
         view.style.marginTop = view.style.marginBottom = verticalMargin + "px";
     }
 
-    /* More code of your Manager.ts like `changeScene` and `update`*/
+    /* More code of your Manager.ts like `changeScene` and `update` */
 }

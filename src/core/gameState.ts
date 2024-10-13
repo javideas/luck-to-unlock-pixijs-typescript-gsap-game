@@ -1,7 +1,7 @@
 import { EventEmitter } from 'eventemitter3';
 import { combinationGenerator, CombinationPair } from '../utils/combinationGenerator';
 
-export class GameState extends EventEmitter {
+export default class GameState extends EventEmitter {
     private currentCombination: CombinationPair[] = [];
 
     constructor() {
@@ -23,5 +23,3 @@ export class GameState extends EventEmitter {
         return this.currentCombination;
     }
 }
-
-export default GameState;

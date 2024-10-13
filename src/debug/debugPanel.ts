@@ -123,14 +123,9 @@ export function createDebugPanel(app: Application, posX: number, posY: number): 
 }
 
 export function updateDebugPanel(panel: Container, combination: CombinationPair[]) {
-    console.log('updateCombinationDebugPanel', combination);
-    
     const infoTexts = panel.children.filter(child => child instanceof Text) as Text[];
-    console.log('Found info texts:', infoTexts.length);
-    
     // Find the index where the combination info starts
     const combinationStartIndex = infoTexts.findIndex(text => text.text.startsWith('Current Combination:'));
-    console.log('Combination start index:', combinationStartIndex);
     
     if (combinationStartIndex !== -1) {
         // Update the combination title
@@ -160,8 +155,6 @@ export function updateDebugPanel(panel: Container, combination: CombinationPair[
         
         // Reposition all texts
         const titleText = panel.getChildByName('titleText') as Text | null;
-        console.log('Title text found:', titleText !== null);
-        
         const textPadding = 35;
         const titlePadding = 20;
         

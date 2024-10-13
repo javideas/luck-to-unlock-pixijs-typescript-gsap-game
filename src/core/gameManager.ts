@@ -36,7 +36,7 @@ class GameManager {
             this.inputManager = new InputManager(this.app, this.playerState, this.handleSprite);
             this.inputManager.init();
 
-            // this.inputManager.createDebugQuadrants(this.stageContainer);
+            this.playerState.on('rotateHandle', this.onRotateHandle.bind(this));
         } else {
             console.error('Handle sprite not initialized properly');
         }
@@ -56,6 +56,10 @@ class GameManager {
     private onCombinationChanged(combination: CombinationPair[]) {
         updateDebugPanel(this.debugPanel, combination);
     }
-}
 
+    private onRotateHandle(direction: 'clockwise' | 'counterclockwise') {
+        console.log(`GameManager: Player rotates handle ${direction}`);
+        // Here you can add logic to trigger animations or other game events
+    }
+}
 export default GameManager;

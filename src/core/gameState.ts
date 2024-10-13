@@ -13,7 +13,6 @@ export default class GameState extends EventEmitter {
 
     setPlayerState(playerState: PlayerState) {
         this.playerState = playerState;
-        this.setupEventListeners();
     }
 
     private initializeGame() {
@@ -24,17 +23,6 @@ export default class GameState extends EventEmitter {
         });
 
         combinationGenerator.startGenerating();
-    }
-
-    private setupEventListeners() {
-        if (this.playerState) {
-            this.playerState.on('rotateHandle', this.rotateHandle.bind(this));
-        }
-    }
-
-    private rotateHandle(direction: 'clockwise' | 'counterclockwise') {
-        console.log(`GameState: Player rotates handle ${direction}`);
-
     }
 
     getCurrentCombination(): CombinationPair[] {

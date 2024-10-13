@@ -21,25 +21,18 @@ function createTitleText(title: string, scaleFactor: number): Text {
 function createInfoTexts(infoTexts: Record<string, { label: string, value: any }>, scaleFactor: number): Text[] {
     const texts: Text[] = [];
 
-    for (const key in infoTexts) {
-        const info = infoTexts[key];
-        if (typeof info.value === 'object') {
-            // Add a title for the current combination section
-            texts.push(createText(`${info.label}:`, {
-                fontSize: 32 * scaleFactor,
-                fill: 'lightgray',
-                fontWeight: 'bold'
-            }, 0, 0));
+    // Only include the "Current Combination" section
+    if (infoTexts['current_combination']) {
+        const info = infoTexts['current_combination'];
+        texts.push(createText(`${info.label}:`, {
+            fontSize: 32 * scaleFactor,
+            fill: 'lightgray',
+            fontWeight: 'bold'
+        }, 0, 0));
 
-            for (const pairKey in info.value) {
-                const pair = info.value[pairKey];
-                texts.push(createText(`${pair.label}: Direction: ${pair.direction}, Steps: ${pair.steps}`, {
-                    fontSize: 32 * scaleFactor,
-                    fill: 'lightgray'
-                }, 0, 0));
-            }
-        } else {
-            texts.push(createText(`${info.label}: ${info.value}`, {
+        for (const pairKey in info.value) {
+            const pair = info.value[pairKey];
+            texts.push(createText(`${pair.label}: Direction: ${pair.direction}, Steps: ${pair.steps}`, {
                 fontSize: 32 * scaleFactor,
                 fill: 'lightgray'
             }, 0, 0));

@@ -1,4 +1,4 @@
-import { Application, Container, Sprite } from 'pixi.js';
+import { Application, Container } from 'pixi.js';
 import GameState from './gameState';
 import PlayerState from './playerState';
 import InputManager from '../controllers/inputManager';
@@ -6,6 +6,7 @@ import { loadImgAssets } from '../utils/assetsLoader';
 import { initStageVault } from '../stages/stageVault';
 import { createDebugPanel, updateDebugPanel } from '../debug/debugPanel';
 import { CombinationPair } from '../utils/combinationGenerator';
+import { Vault } from '../components/vault';
 
 class GameManager {
     private app: Application;
@@ -14,7 +15,7 @@ class GameManager {
     private inputManager: InputManager;
     private stageContainer: Container;
     private debugPanel: Container;
-    private handleSprite: Sprite;
+    private vault: Vault;
 
     constructor(app: Application) {
         this.app = app;
@@ -27,18 +28,17 @@ class GameManager {
         this.app.stage.addChild(this.stageContainer);
         const imgAssets = await loadImgAssets();
 
-        const { handleSprite } = await initStageVault(this.app, this.stageContainer, imgAssets);
-        this.handleSprite = handleSprite;
+        this.vault = await initStageVault(this.app, this.stageContainer, imgAssets);
 
-        if (this.handleSprite) {
-            this.playerState = new PlayerState(this.app, this.gameState, this.handleSprite);
+        if (this.vault) {
+            this.playerState = new PlayerState(this.app, this.gameState, this.vault.getHandleSprite());
             this.gameState.setPlayerState(this.playerState);
-            this.inputManager = new InputManager(this.app, this.playerState, this.handleSprite);
+            this.inputManager = new InputManager(this.app, this.playerState, this.vault.getHandleSprite());
             this.inputManager.init();
 
             this.playerState.on('rotateHandle', this.onRotateHandle.bind(this));
         } else {
-            console.error('Handle sprite not initialized properly');
+            console.error('Vault not initialized properly');
         }
 
         this.initDebugPanel();
@@ -59,7 +59,8 @@ class GameManager {
 
     private onRotateHandle(direction: 'clockwise' | 'counterclockwise') {
         console.log(`GameManager: Player rotates handle ${direction}`);
-        // Here you can add logic to trigger animations or other game events
+        this.vault.rotateHandle(direction);
     }
 }
+
 export default GameManager;

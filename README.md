@@ -61,19 +61,19 @@ This project is a mini game where the player must unlock a vault to reveal a tre
                 "treasureAnims.ts": "Glitter and shine animations"
             },
             ✔"assetLoader.ts": "Handles loading of assets (images, sounds, etc.)",
-            "gameManager.ts": "Manage game",
-            "gameState.ts": "Track and Update game progression",
-            "playerState.ts": "Track and Update player progression",
+            ✔"gameManager.ts": "Manage game",
+            ✔"gameState.ts": "Track and Update game progression",
+            ✔"playerState.ts": "Track and Update player progression",
             "soundManager.ts": "Manages sound effects"
         },
-        "gameObjects": {
+        "components": {
             "handle.ts": "Manages vault handle sprite and rotations",
             "timer.ts": "Manages time counter display",
             "treasure.ts": "Manages treasure sprite and animations",
             "vault.ts": "Manages vault door sprite and state"
         },
-        "controllers": {
-            "inputManager.ts": "Manages user input (click, drag, etc.)"
+        ✔"controllers": {
+            ✔"inputManager.ts": "Manages user input (click, drag, etc.)"
         },
         ✔"stages": {
             ✔"stageVault.ts": "Handles the vault stage setup and interactions"

@@ -73,4 +73,8 @@ export class Vault {
     public rotateHandle(direction: 'clockwise' | 'counterclockwise') {
         this.handleAnims.rotateHandle(direction);
     }
+
+    public getHandleAnims(): HandleAnims {
+        return this.handleAnims;
+    }
 }

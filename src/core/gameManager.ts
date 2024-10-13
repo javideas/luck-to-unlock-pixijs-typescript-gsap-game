@@ -33,6 +33,11 @@ class GameManager {
         if (this.vault) {
             this.playerState = new PlayerState(this.app, this.gameState, this.vault.getHandleSprite());
             this.gameState.setPlayerState(this.playerState);
+            
+            // Get HandleAnims from Vault and pass it to GameState
+            const handleAnims = this.vault.getHandleAnims();
+            this.gameState.setHandleAnims(handleAnims);
+
             this.inputManager = new InputManager(this.app, this.playerState, this.vault.getHandleSprite());
             this.inputManager.init();
 

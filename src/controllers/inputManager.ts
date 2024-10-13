@@ -17,7 +17,6 @@ export default class InputManager {
         this.handleSprite.on('pointerdown', this.handlePointerDown.bind(this));
         this.handleSprite.on('pointerup', this.handlePointerUp.bind(this));
         this.handleSprite.on('pointerupoutside', this.handlePointerUp.bind(this));
-        console.log('InputManager initialized');
     }
 
     private handlePointerDown(event: PIXI.FederatedPointerEvent) {

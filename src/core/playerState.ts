@@ -86,12 +86,12 @@ export default class PlayerState extends EventEmitter {
                 return;
         }
 
-        console.log('Direction determined:', {
-            quadrant: this.startQuadrant,
-            direction: direction
-        });
+        // console.log('Direction determined:', {
+        //     quadrant: this.startQuadrant,
+        //     direction: direction
+        // });
 
-        this.updatePlayerProgress(direction);
+        // this.updatePlayerProgress(direction);
         this.emit('rotateHandle', direction);
     }
 

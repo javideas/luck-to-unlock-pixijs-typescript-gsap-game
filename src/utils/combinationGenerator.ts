@@ -12,15 +12,17 @@ class CombinationGenerator extends EventEmitter {
 
         for (let i = 0; i < 3; i++) {
             const direction = directions[Math.floor(Math.random() * directions.length)];
-            const steps = Math.floor(Math.random() * 9) + 1; // Random number between 1 and 9
+            const steps = Math.floor(Math.random() * 9) + 1;
             combination.push({ direction, steps });
         }
-
+        console.log('Generated combination:', combination);
         this.emit('newCombination', combination);
     }
 
-    startGenerating() {
-        setInterval(() => this.generateCombination(), 3000);
+    // Renamed from startGenerating to generateNewCombination
+    generateNewCombination() {
+        this.generateCombination();
+        
     }
 }
 

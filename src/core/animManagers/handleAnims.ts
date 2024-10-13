@@ -1,11 +1,13 @@
 import { gsap } from 'gsap';
 import { Sprite } from 'pixi.js';
+import { EventEmitter } from 'events';
 
-export class HandleAnims {
+export class HandleAnims extends EventEmitter {
     private handle: Sprite;
     private handleShadow: Sprite;
 
     constructor(handle: Sprite, handleShadow: Sprite) {
+        super();
         this.handle = handle;
         this.handleShadow = handleShadow;
     }
@@ -34,7 +36,8 @@ export class HandleAnims {
             duration: 0.1,
             ease: "power1.out",
             onComplete: () => {
-                console.log('Handle rotation complete', { handleRotation: this.handle.rotation });
+                console.log('Handle rotation complete', { handleRotation: direction });
+                this.emit('rotationComplete', direction);
             }
         });
     }

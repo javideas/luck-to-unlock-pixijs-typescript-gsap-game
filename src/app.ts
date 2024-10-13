@@ -1,21 +1,16 @@
 import { Application, VERSION } from "pixi.js";
-import GameManager from "./core/gameManager";
+// import GameManager from "./core/gameManager";
+import { Manager } from "./core/manager";
 
 function main() {
-    // Create a new PixiJS application
-    const app = new Application({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        backgroundColor: 0x1099bb,
-        resizeTo: document.body
-    });
 
-    document.body.appendChild(app.view);
+    // document.body.appendChild(app.view);
     console.log('Javideas presents... Luck to Unlock!');
     console.log('PixiJS app initialized. Version:', VERSION);
 
     // Initialize the GameManager
-    const gameManager = new GameManager(app);
+    // const gameManager = new GameManager(app);
+    Manager.initialize(5995, 3000, 0xf9e2b7);
 }
 
 main();

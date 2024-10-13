@@ -1,5 +1,4 @@
 import { Container, Sprite, Application } from 'pixi.js';
-import { fitToScreen } from '../utils/stageUtils';
 import { HandleAnims } from '../core/animManagers/handleAnims';
 
 export class Vault {
@@ -20,6 +19,8 @@ export class Vault {
     }
 
     private initVault(imgAssets: any) {
+        this.containerOffsetX = this.app.screen.width / 2;
+        this.containerOffsetY = this.app.screen.height / 2;
         this.initBg(imgAssets);
         this.loadDoorWithHandle(imgAssets);
     }
@@ -29,8 +30,6 @@ export class Vault {
         const bankBgSprite = Sprite.from(bankBg);
         bankBgSprite.anchor.set(0.5, 0.5);
         this.container.addChild(bankBgSprite);
-
-        fitToScreen(this.app, this.container, bankBgSprite);
     }
 
     private loadDoorWithHandle(imgAssets: any) {
@@ -60,6 +59,7 @@ export class Vault {
         this.handleContainer.position.set(-40, -20);
         this.doorContainer.addChild(this.handleContainer);
         this.container.addChild(this.doorContainer);
+        this.container.position.set(this.containerOffsetX, this.containerOffsetY);
     }
 
     public getHandleSprite(): Sprite {

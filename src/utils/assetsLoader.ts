@@ -1,6 +1,6 @@
 import { Assets, Texture, SCALE_MODES } from 'pixi.js';
 const imgFolderPath = './assets/images/';
-
+// './assets/images/bg.png'
 const assetsPaths = {
   bankBg: imgFolderPath + 'bg.png',
   doorClosed: imgFolderPath + 'door.png',

@@ -1,23 +1,17 @@
 import { Application, Container, Sprite, Texture } from "pixi.js";
-import GameState from './gameState';
-import PlayerState from './playerState';
-import InputManager from '../controllers/inputManager';
 import { loadImgAssets } from '../utils/assetsLoader';
-import { fitToScreen } from '../utils/stageUtils';
-import { initStageVault } from '../stages/stageVault';
-import { createDebugPanel, updateDebugPanel } from '../debug/debugPanel';
-import { CombinationPair } from '../utils/combinationGenerator';
-import { Vault } from '../components/vault';
 
 export class Manager {
-    private constructor() { }
+    private constructor() { 
+        this.stageContainer = new Container();
+    }
 
     private static app: Application;
     private static currentScene: IScene;
 
     private static _width: number;
     private static _height: number;
-    private static stageContainer: Container = new Container();
+
 
     public static get width(): number {
         return Manager._width;
@@ -27,7 +21,7 @@ export class Manager {
     }
 
 
-    public static async initialize(width: number, height: number, background: number): void {
+    public static initialize(width: number, height: number, background: number): void {
 
         Manager._width = width;
         Manager._height = height;
@@ -41,7 +35,7 @@ export class Manager {
             height: height
         });
 
-        // Manager.app.ticker.add(Manager.update)
+        Manager.app.ticker.add(Manager.update)
 
         // listen for the browser telling us that the screen size changed
         window.addEventListener("resize", Manager.resize);
@@ -49,9 +43,11 @@ export class Manager {
         // call it manually once so we are sure we are the correct size after starting
         Manager.resize();
 
-        Manager.app.stage.addChild(Manager.stageContainer);
-        const imgAssets = await loadImgAssets();
-        this.vault = await initStageVault(Manager.app, this.stageContainer, imgAssets);
+        const bankBgSprite = Sprite.from('./assets/images/bg.png');
+
+        bankBgSprite.anchor.set(0, 0);
+        Manager.app.stage.addChild(bankBgSprite);
+
     }
 
     public static resize(): void {

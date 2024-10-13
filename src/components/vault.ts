@@ -21,7 +21,12 @@ export class Vault {
 
         // Initialize VaultAnims with door sprite and open texture
         const doorOpenTexture = imgAssets.doorOpen;
-        this.vaultAnims = new VaultAnims(this.doorSprite, doorOpenTexture);
+        const blinkTexture = imgAssets.blink;
+        this.doorOpenSprite = new Sprite(doorOpenTexture);
+        this.blinkSprite = new Sprite(blinkTexture);
+        this.vaultAnims = new VaultAnims(this.app, this.doorSprite, this.doorOpenSprite, this.handleSprite, this.handleShadowSprite, this.blinkSprite);
+        
+        // this.vaultAnims.debugOpenDoor();
     }
 
     private initVault(imgAssets: any) {

@@ -62,7 +62,8 @@ export class Manager {
                 updateDebugPanel(Manager.debugPanel, combination);
             });
             Manager.gameState.on('gameWon', Manager.onhandleGameWon.bind(this));
-        
+            Manager.gameState.on('gameReset', Manager.onhandleGameReset.bind(this));
+
             Manager.playerState = new PlayerState(Manager.app, Manager.gameState, Manager.vault.getHandleSprite());
             Manager.gameState.setPlayerState(Manager.playerState);
 
@@ -87,6 +88,12 @@ export class Manager {
         const panelY = Manager.app.screen.height / -2.5;
         Manager.debugPanel = createDebugPanel(Manager.app, panelX, panelY);
         Manager.stageContainer.addChild(Manager.debugPanel);
+        // Manager.stageContainer.setChildIndex(Manager.debugPanel, Manager.stageContainer.children.length - 1);
+    }
+
+    private static onhandleGameReset() {
+        console.log('GameManager: Game has been reset!');
+        Manager.vault.vaultAnims.closeDoor();
     }
 
     private static onRotateHandle(direction: 'clockwise' | 'counterclockwise') {

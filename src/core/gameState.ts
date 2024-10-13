@@ -56,12 +56,6 @@ export default class GameState extends EventEmitter {
     }
 
     private checkRotation(direction: 'clockwise' | 'counterclockwise') {
-        // if (this.currentStep >= this.currentCombination.length) {
-        //     console.log('All steps completed. Checking final result...');
-        //     this.checkFinalResult();
-        //     return;
-        // }
-
         const currentPair = this.currentCombination[this.currentStep];
 
         if (direction === currentPair.direction) {
@@ -78,41 +72,44 @@ export default class GameState extends EventEmitter {
                 if (remaining) {
                     console.log(`Expected step ${this.currentStep + 1}: ${remaining.steps} ${remaining.direction}`);
                 } else {
-                    this.winGame(); // Call the winning function
+                    this.winGame();
                 }
             }
         } else {
             console.log('Incorrect direction. Resetting game...');
-            this.resetGame();
+            this.resetCombination();
         }
     }
-
-    // private checkFinalResult() {
-    //     if (this.currentCombination.every(pair => pair.steps === 0)) {
-    //         console.log('Vault unlocked! Revealing treasure...');
-    //         this.emit('vaultUnlocked');
-    //     } else {
-    //         console.log('Combination incomplete. Resetting game...');
-    //         this.resetGame();
-    //     }
-    // }
 
     private winGame() {
         console.log('Congratulations! You have unlocked the vault!');
         // Emit a win event for the GameManager to listen to
         this.emit('gameWon');
 
-        // // Reset the game after a delay
-        // setTimeout(() => {
-        //     console.log('Resetting game for a new round...');
-        //     this.resetGame();
-        // }, 5000); // 5-second delay before resetting
+        // Start a timer using requestAnimationFrame
+        let startTime = performance.now();
+
+        const checkTime = (currentTime: number) => {
+            if (currentTime - startTime >= 5000) {
+                console.log('5 seconds have passed!');
+                this.resetGame();
+            } else {
+                requestAnimationFrame(checkTime);
+            }
+        };
+
+        requestAnimationFrame(checkTime);
     }
 
     private resetGame() {
+        this.emit('gameReset');
+        this.resetCombination();
+    }
+
+    private resetCombination() {
         this.currentStep = 0;
         this.generateNewCombination();
-        this.emit('gameReset');
+
     }
 
     private generateNewCombination() {

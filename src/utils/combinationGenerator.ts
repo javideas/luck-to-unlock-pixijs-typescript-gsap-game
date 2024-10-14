@@ -6,7 +6,7 @@ export interface CombinationPair {
 }
 
 export class CombinationGenerator extends EventEmitter {
-    maxSteps: number = 1; // Default maximum steps value
+    maxSteps: number = 9; // Default maximum steps value
 
     generateCombination() {
         const directions = ["clockwise", "counterclockwise"];

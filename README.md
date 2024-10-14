@@ -52,7 +52,6 @@ This project is a mini game where the player must unlock a vault to reveal a tre
     ✔"src": {
         "components": {
             ✔"handle.ts": "Manages vault handle sprite and rotations",
-            ✔"timer.ts": "Manages time counter display",
             ✔"vault.ts": "Manages vault door sprite and state"
         },
         ✔"config": {

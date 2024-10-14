@@ -1,4 +1,4 @@
-import { Application, Container } from "pixi.js";
+import { Application, Container, Text, TextStyle } from "pixi.js";
 import GameState from './gameState';
 import PlayerState from './playerState';
 import InputManager from '../controllers/inputManager';
@@ -19,6 +19,9 @@ export class Manager {
     private static stageContainer: Container = new Container();
     private static debugPanel: Container;
     private static vault: Vault;
+    private static timerText: Text;
+    private static startTime: number;
+    private static timerRunning: boolean;
 
     private static _width: number;
     private static _height: number;
@@ -78,6 +81,10 @@ export class Manager {
             console.error('Vault not initialized properly');
         }
 
+        Manager.initTimerText();
+
+        // Start the timer
+        Manager.startTimer();
 
         Manager.resize();
     }
@@ -90,9 +97,42 @@ export class Manager {
         // Manager.stageContainer.setChildIndex(Manager.debugPanel, Manager.stageContainer.children.length - 1);
     }
 
+    private static initTimerText() {
+        const style = new TextStyle({
+            fill: "white",
+            fontFamily: "Comic Sans MS",
+            fontSize: 50,
+            fontWeight: "bold"
+        });
+
+        Manager.timerText = new Text("Time: 0s", style);
+        Manager.timerText.alpha = 0;
+        Manager.timerText.position.set(-1240, -180);
+        Manager.stageContainer.addChild(Manager.timerText);
+    }
+
+    private static startTimer() {
+        Manager.startTime = performance.now();
+        Manager.timerRunning = true;
+        Manager.timerText.alpha = 0; // Hide the timer text initially
+        Manager.updateTimer();
+    }
+
+    private static updateTimer() {
+        if (!Manager.timerRunning) return;
+
+        const currentTime = performance.now();
+        const elapsedSeconds = ((currentTime - Manager.startTime) / 1000).toFixed(1);
+        Manager.timerText.text = `${elapsedSeconds}s!`;
+
+        requestAnimationFrame(Manager.updateTimer);
+    }
+
     private static onhandleGameReset() {
         console.log('GameManager: Game has been reset!');
         Manager.vault.vaultAnims.closeDoor();
+        Manager.timerText.alpha = 0; // Hide the timer text again
+        Manager.startTimer(); // Restart the timer
     }
 
     private static onRotateHandle(direction: 'clockwise' | 'counterclockwise') {
@@ -102,6 +142,8 @@ export class Manager {
     private static onhandleGameWon() {
         console.log('GameManager: Player has won the game!');
         Manager.vault.vaultAnims.openDoor();
+        Manager.timerRunning = false; // Pause the timer
+        Manager.timerText.alpha = 1; // Show the timer text
     }
 
     public static resize(): void {

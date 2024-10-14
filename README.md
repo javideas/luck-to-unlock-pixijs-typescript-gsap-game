@@ -1,27 +1,31 @@
+
+
+
+https://github.com/user-attachments/assets/4a6d5ec4-4a7a-4b0a-a32d-a7b724bace45
+
+
 ![Background Image](public/assets/images/bg.png)
 # "Luck to Unlock" Mini Game
 
-## [Live Demo](https://javideas.github.io/luck-to-unlock-pixijs-typescript-gsap-game/)
-
 ## Table of Contents
+- [TIP](#tip)
+- [Live Demo](#live-demo)
 - [Overview](#overview)
 - [Game Flow](#game-flow)
-- [Requirements](#requirements)
-- [Bonus Features](#bonus-features)
+- [Features](#features)
 - [Technologies Used](#technologies-used)
+- [How to install](#how-to-install)
 - [Project Structure](#project-structure)
-- [Contribution Guidelines](#contribution-guidelines)
+
+## TIP 
+### How to WIN always (Who doesn’t want to?)
+Click the red button on the Debug Panel and follow the combination. If you make a mistake, the handle will "spin like crazy"!
+
+## Live Demo
+[Live Demo](https://javideas.github.io/luck-to-unlock-pixijs-typescript-gsap-game/)
 
 ## Overview
 This project is a mini game where the player must unlock a vault to reveal a treasure. The game involves interacting with a vault handle to enter a secret combination.
-
-# How to install
-```
-git clone https://github.com/javideas/luck-to-unlock-pixijs-typescript-gsap-game.git
-cd luck-to-unlock-pixijs-typescript-gsap-game
-npm install
-npm run dev
-```
 
 ## Game Flow
 1. **Start**: The game begins with the vault door closed. A random secret combination is generated and logged in the browser console.
@@ -30,16 +34,13 @@ npm run dev
 4. **Unlocking**: Enter the correct combination to open the vault door, revealing the treasure with a glitter animation.
 5. **Error Handling**: If an incorrect combination is entered, the game resets with a new combination, and the vault handle spins rapidly as a visual cue.
 
-## Requirements
-- Using the provided assets.
-- Implement using PixiJS (version 7 or later) and TypeScript.
+## Features
+- Using premaded assets.
+- Implemented PixiJS (version 7+) and TypeScript.
 - Ensure the game is responsive across different screen resolutions.
-- Maintain a minimum of 5 commits in your repository.
-
-## Bonus Features
 - Use promises instead of `setTimeout` and `setInterval`.
-- Add a shadow to the handle that spins with it.
-- Include a timer on the keypad to track the time taken to unlock the safe, resetting with each new game.
+- Added a shadow to the handle that spins with it.
+- Includde a timer on the keypad to track the time taken to unlock the safe, resetting with each new game.
 - Automatically close the vault door 5 seconds after it opens, with the handle spinning as if resetting, and start a new game.
 
 ## Technologies Used
@@ -51,11 +52,24 @@ npm run dev
 - **GSAP**: For creating smooth animations.
 - **Vite**: For building and serving the project.
 
+## How to Install
+
+1. Open any Windows window, type `cmd`, and press Enter.
+2. Run the following commands:
+
+```bash
+git clone https://github.com/javideas/luck-to-unlock-pixijs-typescript-gsap-game.git
+cd luck-to-unlock-pixijs-typescript-gsap-game
+npm install
+npm run dev
+```
+
 ## Project Structure
 ```
 {
     ✔"public": {
-        ✔"images": "The image assets",
+        ✔"assets": {
+            ✔"images": "The image assets",
     },
     ✔"src": {
         ✔"components": {

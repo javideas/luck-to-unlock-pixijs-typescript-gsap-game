@@ -1,3 +1,4 @@
+![Background Image](public/images/bg.png)
 # "Luck to Unlock" Mini Game
 
 ## [Live Demo](https://javideas.github.io/luck-to-unlock-pixijs-typescript-gsap-game/)

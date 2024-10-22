@@ -8,9 +8,8 @@ function main() {
     console.log('Javideas presents... Luck to Unlock!');
     console.log('PixiJS app initialized. Version:', VERSION);
 
-    // Initialize the GameManager
-    // const gameManager = new GameManager(app);
-    Manager.initialize(5995, 3000, 0xf9e2b7);
+    // Create an instance of the Manager
+    const gameManager = new Manager(5995, 3000, 0xf9e2b7);
 }
 
 main();

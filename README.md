@@ -73,7 +73,6 @@ npm run dev
     },
     ✔"src": {
         ✔"components": {
-            ✔"handle.ts": "Manages vault handle sprite and rotations",
             ✔"vault.ts": "Manages vault door sprite and state"
         },
         ✔"config": {
@@ -87,7 +86,6 @@ npm run dev
                 ✔"handleAnims.ts": "Animations related to the handle",
                 ✔"vaultAnims.ts": "Animations related to the door"
             },
-            ✔"assetLoader.ts": "Handles loading of assets (images, sounds, etc.)",
             ✔"gameManager.ts": "Manage game",
             ✔"gameState.ts": "Track and Update game progression",
             ✔"playerState.ts": "Track and Update player progression",
@@ -98,14 +96,16 @@ npm run dev
         ✔"stages": {
             ✔"stageVault.ts": "Handles the vault stage setup and interactions"
         },
-        ✔"styles": {
-            ✔"styles.css": "Global CSS file for the project"
-        },
         ✔"utils": {
+            ✔"assetLoader.ts": "Handles loading of assets (images, sounds, etc.)",
             ✔"combinationGenerator.ts": "Generates the random secret combination for the vault",
-            ✔"stageUtils.ts": "Utility functions for stage setup"
+            ✔"stageUtils.ts": "Utility functions for stage setup",
+            ✔"textUtils.ts": "Utility functions for text"
         },
         ✔"app.ts": "Entry point for game initialization",
+    },
+    ✔"styles": {
+        ✔"styles.css": "Global CSS file for the project"
     },
     ".gitignore": "Git ignore file",
     "index.html": "Main HTML file",

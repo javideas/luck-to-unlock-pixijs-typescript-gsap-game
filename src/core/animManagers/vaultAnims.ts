@@ -42,7 +42,7 @@ export class VaultAnims {
     }
 
     openDoor() {
-        this.blinkSprite.scale = 0;
+        this.blinkSprite.scale.set(0);
         this.blinkSprite.rotation = 0;
         gsap.timeline()
             .to([this.handleSprite, this.handleShadowSprite, this.doorSprite], {
@@ -54,12 +54,12 @@ export class VaultAnims {
                 duration: 0.5
             })
             .to(this.blinkSprite, {
-                pixi: { alpha: 1, rotation: 390, scale: 1.2 },
+                pixi: { alpha: 1, rotation: 360, scale: 1.2 },
                 duration: 0.5,
                 ease: 'power2.out'
             })
             .to(this.blinkSprite, {
-                pixi: { scale: 1.7 },
+                pixi: { scale: 1.7, rotation: "+=360" },
                 duration: 2,
                 yoyo: true,
                 repeat: -1,

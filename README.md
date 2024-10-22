@@ -29,7 +29,7 @@ This project is a mini game where the player must unlock a vault to reveal a tre
 
 ## Game Flow
 1. **Start**: The game begins with the vault door closed. A random secret combination is generated and logged in the browser console.
-2. **Combination**: The combination consists of 3 pairs, each with a number (1-9) and a direction ("clockwise" or "counterclockwise"). For example: "2 clockwise, 7 counterclockwise, 5 clockwise".
+2. **Combination**: The combination consists of 3 pairs, each with a number (1-3) and a direction ("clockwise" or "counterclockwise"). For example: "2 clockwise, 3 counterclockwise, 1 clockwise".
 3. **Interaction**: Players can interact with the vault handle by clicking or dragging. Each interaction rotates the handle by a visual appealing number of steps with animation.
 4. **Unlocking**: Enter the correct combination to open the vault door, revealing the treasure with a glitter animation.
 5. **Error Handling**: If an incorrect combination is entered, the game resets with a new combination, and the vault handle spins rapidly as a visual cue.

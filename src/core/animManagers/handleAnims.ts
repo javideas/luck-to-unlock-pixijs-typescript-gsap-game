@@ -47,22 +47,23 @@ export class HandleAnims extends EventEmitter {
     }
 
     spinsCrazy() {
-        const spinDuration = 1000;
-        const startTime = performance.now();
+        const spinDuration = 0.2; // Shorter duration for each spin to make it faster
+        const totalSpins = 10; // Increase the number of spins for a more chaotic effect
 
-        const spinLoop = () => {
-            const currentTime = performance.now();
-            if (currentTime - startTime < spinDuration) {
-                const randomDirection = Math.random() > 0.5 ? 'clockwise' : 'counterclockwise';
-                const randomRotationIncrement = (Math.random() * 180 + 60) * (Math.PI / 180);
-                this.rotateHandle(randomDirection, true, randomRotationIncrement);
-                requestAnimationFrame(spinLoop);
-            } else {
+        const timeline = gsap.timeline({
+            onComplete: () => {
                 console.log('Crazy spin complete');
                 this.emit('spinCrazyComplete');
             }
-        };
+        });
 
-        spinLoop();
+        for (let i = 0; i < totalSpins; i++) {
+            const directionMultiplier = i % 2 === 0 ? 1 : -1; // Alternate direction
+            timeline.to([this.handle, this.handleShadow], {
+                rotation: "+=" + (2 * Math.PI * directionMultiplier), // Full rotation in alternating directions
+                duration: spinDuration,
+                ease: "power1.inOut" // Use a more dynamic easing
+            });
+        }
     }
 }
